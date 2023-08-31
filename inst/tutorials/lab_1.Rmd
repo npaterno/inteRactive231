@@ -1,0 +1,27 @@
+---
+title: "Stat231::Lab1 - Intro to R and RStudio"
+output:
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+description: >
+  The goal of this lab is to introduce you to the basics of R and RStudio.
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE, 
+  warning = FALSE,
+  collapse = TRUE,
+  comment = "#>")
+
+library(learnr)
+library(openintro)
+library(dplyr)
+library(readr)
+library(magrittr)
+
+```
+

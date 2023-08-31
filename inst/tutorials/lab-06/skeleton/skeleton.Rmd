@@ -1,0 +1,26 @@
+---
+title: "Analysis of Variance Assignment"
+author: ""
+date: ""
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(openintro)
+```
+
+### Problem One: 
+Use the classic and p-value method to determine if there is a difference in the average price of diamonds based on the color of the diamond. 
+
+```{r}
+# CODE BLOCK FOR YOUR ANOVA TEST
+```
+
+```{r}
+# CODE BLOCK FOR CALCULATING CRITICAL F
+```
+#### Conclusion for p-value method:
+
+#### Conclusion for classic method:
