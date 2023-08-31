@@ -131,9 +131,9 @@ mariokart |>
 
 
 ## Making a graph
-One of the graphs that we'll make most often is a histogram. We'll learn about these more in depth next week when we start chapter 2; we'll also cover this code more in depth in our next lab. Essentially a histogram will give us a visual of the distribution of values for a given variable. 
+One of the graphs that we'll make most often is a histogram. We'll learn about these more in depth next week when we start chapter 2; we'll also cover this code more in depth in a later lab session. Essentially a histogram will give us a visual of the distribution of values for a given variable. 
 
-To create a histogram with R, we'll use the `ggplot2` package. The `gg` stands for "Grammer of Graphics". It allows us to build plots one layer at a time. Again, this will be covered more in depth for lab 2; today is just a sneak peak of where we're going. 
+To create a histogram with R, we'll use the `ggplot2` package. The `gg` stands for "Grammer of Graphics". It allows us to build plots one layer at a time. Again, this will be covered more in depth in a later lab session; today is just a sneak peak of where we're going. 
 
 ```{r bids-histogram, exercise = TRUE, eval = TRUE}
 ggplot(data = mariokart, mapping = aes(x = n_bids)) + 

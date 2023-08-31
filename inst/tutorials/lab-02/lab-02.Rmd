@@ -1,0 +1,196 @@
+---
+title: "Stat231::Lab2 - Summary Statistics"
+output:
+  learnr::tutorial:
+  progressive: true
+allow_skip: true
+runtime: shiny_prerendered
+description: >
+  For this lab, we will be looking at calculating summary statistics, such as a five number summary, as well as boxplots.
+---
+  
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE, 
+  warning = FALSE,
+  collapse = TRUE,
+  comment = "#>")
+
+library(learnr)
+library(dplyr)
+library(readr)
+library(magrittr)
+library(ggplot2)
+library(inteRactive231)
+```
+
+## The Data
+
+We will be using the diamonds data set from the `ggplot2` package. Let's take a look at the data. This time, we'll use the **head** function which will show use the first six rows of data. Then we'll use **nrow** to see how big the data set is. 
+
+```{r diamonds-glimpse, echo = TRUE}
+head(diamonds)
+```
+
+This data set includes information on the characteristics of diamonds.
+
+```{r diamonds-size, echo = TRUE}
+nrow(diamonds)
+```
+
+Almost 54,000 rows! While this is definitely a large data set, it is not uncommon to have hundreds of thousands or even millions of rows in practice. For example, imagine a data base of patient records for an organization like Multicare. Let's assume that everyone in Puyallup (approximately 43,000 residents, average age 38) goes to Multicare and each interaction/visit with Multicare is its own row. Even if people only see a doctor once per year that would be 1,634,000 rows!
+
+## Five Number Summary
+
+There are a two ways we can calculate the five number summary, both of which use built in functions. For the examples, we will look at the price of these diamonds. 
+
+```{r price-summary, echo = TRUE}
+summary(diamonds$price)
+```
+The `summary()` function outputs the five number summary, plus the mean, of a numeric variable.
+
+Let's see what happens when we use the `summary()` function on a categorical variable. 
+
+```{r color-summary, echo = TRUE}
+summary(diamonds$color)
+```
+With a categorical variable, `summary()` outputs a frequency distribution!
+
+With such a large data set, it might be useful to have some summary statistics for specific subsets. For example, we might expect diamonds with different clarity to have different prices. The `dplyr` package allows us to disaggregate our data set by a specific variable before calculating summary values. For this, we'll use the `fivenum()` function. 
+
+First, lets look at how to pull out one value from the results of `fivenum()`.
+
+```{r price-five-num, echo = TRUE}
+# Whole Summary
+fivenum(diamonds$price)
+
+# One Value
+fivenum(diamonds$price)[1]
+```
+This gives the minimum value (1st number of the summary) of the variable. Now lets calculate the whole five number summary for the individual clarity values and print the results in a table.
+
+```{r price-clarity-five-num, echo = TRUE}
+diamonds |>  
+  group_by(clarity) |>  
+  summarize(min = fivenum(price)[1],
+            q1 = fivenum(price)[2],
+            med = fivenum(price)[3],
+            q3 = fivenum(price)[4],
+            max = fivenum(price)[5]) 
+```
+
+### Your Turn!
+
+Calculate the five-number-summary for the `carat` variable. 
+```{r carat-five-num, exercise = TRUE}
+
+```
+
+```{r carat-five-num-hint}
+fivenum(___)
+```
+
+```{r carat-five-num-solution}
+fivenum(diamonds$carat)
+```
+
+Calculate the five number summary for `carat` when grouped by `cut`.
+```{r carat-cut-five-num, exercise = TRUE}
+
+```
+
+```{r carat-cut-five-num-hint}
+diamonds |> 
+  group_by(___) |> 
+  summarize(min = fivenum(___)[1],
+            q1 = fivenum(___)[2],
+            med = fivenum(___)[3],
+            q3 = fivenum(___)[4],
+            max = fivenum(___)[5])
+```
+
+```{r carat-cut-five-num-solution}
+diamonds |> 
+  group_by(cut) |> 
+  summarize(min = fivenum(carat)[1],
+            q1 = fivenum(carat)[2],
+            med = fivenum(carat)[3],
+            q3 = fivenum(carat)[4],
+            max = fivenum(carat)[5])
+```
+
+Calculate the frequency distribution of the `cut` variable.
+
+```{r cut-freq, exercise = TRUE}
+
+```
+
+```{r cut-freq-solution}
+summary(diamonds$cut)
+```
+
+## Boxplots
+Let's create a few boxplots.
+
+```{r price-boxplot, echo = TRUE}
+ggplot(data = diamonds, 
+       aes(y = price))+
+  geom_boxplot()
+```
+
+What if we wanted the boxplot for the grouped data?
+
+```{r price-clarity-boxplot, echo = TRUE}
+ggplot(data = diamonds,
+       aes(x = clarity, 
+           y = price))+
+  geom_boxplot()
+```
+
+### Your Turn!
+
+Sketch a boxplot of the `carat` variable.
+
+```{r carat-boxplot, exercise = TRUE}
+
+```
+
+```{r carat-boxplot-hint}
+ggplot(___, aes(x = ___)) +
+  geom_boxplot()
+```
+
+
+```{r carat-boxplot-solution}
+ggplot(diamonds, aes(x = carat)) +
+  geom_boxplot()
+```
+
+Sketch a boxplot for the `carat` of the diamonds when grouped by `cut`.
+
+```{r carat-cut-boxplot, exercise = TRUE}
+
+```
+
+```{r carat-cut-boxplot-hint}
+ggplot(___, aes(x = ___, y = ___)) + 
+  geom_boxplot()
+```
+
+```{r carat-cut-boxplot-solution}
+ggplot(diamonds, aes(x = carat, y = cut)) + 
+  geom_boxplot()
+```
+
+## Submit
+
+Congratulations! You've completed our second lab day! Please enter your name and student ID below, then click `Generate`. Copy/paste the hash code into your submission on Sakai. 
+
+```{r, echo=FALSE, context = "server"}
+encoder_logic()
+```
+
+```{r encode, echo=FALSE}
+learnrhash::encoder_ui(ui_before = hash_encoder_ui())
+```
