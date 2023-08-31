@@ -13,7 +13,8 @@ Imports:
   readr, 
   magrittr,
   learnr,
-  palmerpenguins
+  palmerpenguins,
+  ggthemes
 Depends:
   R(>= 4.1)
 Encoding: UTF-8
