@@ -188,7 +188,7 @@ ggplot(diamonds, aes(x = carat, y = cut)) +
 Congratulations! You've completed our second lab day! Please enter your name and student ID below, then click `Generate`. Copy/paste the hash code into your submission on Sakai. 
 
 ```{r, echo=FALSE, context = "server"}
-encoder_logic()
+inteRactive231::encoder_logic()
 ```
 
 ```{r encode, echo=FALSE}

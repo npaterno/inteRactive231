@@ -172,7 +172,7 @@ ggplot(data = mariokart, mapping = aes(x = total_pr)) +
 Congratulations! You've completed our first lab day! Please enter your name and student ID below, then click `Generate`. Copy/paste the hash code into your submission on Sakai. 
 
 ```{r, echo=FALSE, context = "server"}
-encoder_logic()
+inteRactive231::encoder_logic()
 ```
 
 ```{r encode, echo=FALSE}

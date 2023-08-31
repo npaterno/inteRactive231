@@ -6,7 +6,7 @@ output:
 allow_skip: true
 runtime: shiny_prerendered
 description: >
-  Being able to analyze data is a good quality. Being able to present it in a clear, concise format is even better. In part I of our data viz labs, we will focus expanding the graphs we made in lab 1 to be more clear, concise and have a bit more style. 
+  Being able to analyze data is a good quality. Being able to present it in a clear, concise format is even better. In part I of our data viz labs, we create clear and concise plots. 
 ---
   
 ```{r, include = FALSE}
@@ -175,7 +175,7 @@ ggplot(data = gpa_study_hours, aes(x = study_hours)) +
 Congratulations! You've completed our third lab day! Please enter your name and student ID below, then click `Generate`. Copy/paste the hash code into your submission on Sakai. 
 
 ```{r, echo=FALSE, context = "server"}
-encoder_logic()
+inteRactive231::encoder_logic()
 ```
 
 ```{r encode, echo=FALSE}
