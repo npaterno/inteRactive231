@@ -14,7 +14,7 @@ Imports:
   magrittr,
   learnr,
   palmerpenguins,
-  ggthemes
+  ggthemes,
   moderndive
 Depends:
   R(>= 4.1)
