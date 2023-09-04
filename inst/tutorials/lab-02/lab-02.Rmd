@@ -135,7 +135,7 @@ Let's create a few boxplots.
 
 ```{r price-boxplot, echo = TRUE}
 ggplot(data = diamonds, 
-       aes(y = price))+
+       aes(y = price)) +
   geom_boxplot()
 ```
 
@@ -144,7 +144,7 @@ What if we wanted the boxplot for the grouped data?
 ```{r price-clarity-boxplot, echo = TRUE}
 ggplot(data = diamonds,
        aes(x = clarity, 
-           y = price))+
+           y = price)) +
   geom_boxplot()
 ```
 
