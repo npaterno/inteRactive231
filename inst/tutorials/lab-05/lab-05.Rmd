@@ -210,7 +210,7 @@ t_test(test_data,
 
 ## Submit
 
-Congratulations! You've completed our fourth lab day! Please enter your name and student ID below, then click `Generate`. Copy/paste the hash code into your submission on Sakai. 
+Congratulations! You've completed our fifth lab day! Please enter your name and student ID below, then click `Generate`. Copy/paste the hash code into your submission on Sakai. 
 
 ```{r, echo=FALSE, context = "server"}
 inteRactive231::encoder_logic()
