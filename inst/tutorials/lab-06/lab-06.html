@@ -14,7 +14,7 @@
 <meta name="allow-skip" content="false" />
 <meta name="learnr-version-prerender" content="0.11.4" />
 
-<title>Stat231::Lab4 - Data Viz Part II</title>
+<title>Stat231::Lab6 - Analysis of Variance Test</title>
 
 <!-- header-includes START -->
 <!-- HEAD_CONTENT -->
@@ -109,164 +109,93 @@ if (window.hljs) {
 
 <article class="topics" id="learnr-tutorial-content">
 
-<div id="section-custom-data-visualization" class="section level2">
-<h2>Custom Data Visualization</h2>
-<p>For this lab, we will once again be focusing on making clear, consice
-plots to present data. Instead of using a prebuilt themes, we will be
-creating our own unique visualizations.</p>
-<p>First, lets start with our plot from lab 3 that included labels.</p>
-<pre class="r"><code>ggplot(data = gpa_study_hours, aes(x = gpa)) +
-  geom_histogram(color = &quot;White&quot;, binwidth = 0.25) +
-  labs( #the labs() function allows us to add labels to our graph
-    title = &quot;Distribution of Grade Point Average&quot;,
-    subtitle = &quot;For 193 Introductory Statistics Students&quot;,
-    x = &quot;GPA&quot;,
-    y = &quot;Number of Students&quot;,
-    caption = &quot;Source: Private US University, 2012&quot;
-  )</code></pre>
-<p><img src="lab-04_files/figure-html/labelled-histo-1.png" width="624" /></p>
-<p>To customize a ggplot image, we’ll add a <code>theme()</code>
-function to the end and change specific parts of the graph. Here is a <a
-href="https://ggplot2.tidyverse.org/reference/theme.html">full list</a>
-of what you can change with the <code>theme()</code> function. It is a
-substantial list but don’t worry, we won’t change all of them.</p>
-</div>
-<div id="section-custom-text" class="section level2">
-<h2>Custom Text</h2>
-<p>First I’m going to adjust my <em>text</em>. I’d prefer to have my
-title a little larger and in Times New Roman font (which R maps to
-serif). I’d also like the axis labels to be in italics.</p>
-<pre class="r"><code>ggplot(data = gpa_study_hours, 
-       aes(x = gpa))+
-  geom_histogram(color = &quot;White&quot;, binwidth = 0.25) +
-  labs(
-    title = &quot;Distribution of Grade Point Average&quot;,
-    subtitle = &quot;For 193 Introductory Statistics Students&quot;,
-    x = &quot;GPA&quot;,
-    y = &quot;Number of Students&quot;,
-    caption = &quot;Source: Private US University, 2012&quot;
-  ) +
-  theme(
-    title = element_text(size = 16,
-                         family = &quot;serif&quot;),
-    axis.title = element_text(face = &quot;italic&quot;)
-  )</code></pre>
-<p><img src="lab-04_files/figure-html/custom-text-1.png" width="624" /></p>
-</div>
-<div id="section-custom-panel" class="section level2">
-<h2>Custom Panel</h2>
-<p>Next, I’m going to adjust the <em>panel</em> the plot is on. I’ll
-change the background color and the grid.</p>
-<pre class="r"><code>ggplot(data = gpa_study_hours, 
-       aes(x = gpa)) +
-  geom_histogram(color = &quot;White&quot;, binwidth = 0.25)+
-  labs(
-    title = &quot;Distribution of Grade Point Average&quot;,
-    subtitle = &quot;For 193 Introductory Statistics Students&quot;,
-    x = &quot;GPA&quot;,
-    y = &quot;Number of Students&quot;,
-    caption = &quot;Source: Private US University, 2012&quot;
-  ) +
-  theme(
-    title = element_text(size = 16,
-                         family = &quot;serif&quot;),
-    axis.title = element_text(face = &quot;italic&quot;),
-    panel.background = element_rect(fill = &quot;lightblue&quot;), 
-    panel.grid.major.x = element_blank(), 
-    panel.grid.minor.x = element_blank(),
-    panel.grid.major.y = element_line(color = &quot;blue&quot;), 
-    panel.grid.minor.y = element_blank()
-  )</code></pre>
-<p><img src="lab-04_files/figure-html/custom-panel-1.png" width="624" /></p>
-</div>
-<div id="section-custom-plot-background" class="section level2">
-<h2>Custom Plot Background</h2>
-<p>My next step will be to address the <em>plot</em> background (the
-white space behind the blue). I’d like it to be the same color. I’ll
-also adjust the color and fill of the bars.</p>
-<pre class="r"><code>ggplot(data = gpa_study_hours, 
-       aes(x = gpa)) +
-  geom_histogram(fill = &quot;aquamarine4&quot;,
-                 color = &quot;lightblue&quot;, 
-                 binwidth = 0.25)+
-  labs(
-    title = &quot;Distribution of Grade Point Average&quot;,
-    subtitle = &quot;For 193 Introductory Statistics Students&quot;,
-    x = &quot;GPA&quot;,
-    y = &quot;Number of Students&quot;,
-    caption = &quot;Source: Private US University, 2012&quot;
-  ) +
-  theme(
-    title = element_text(size = 16,
-                         family = &quot;serif&quot;),
-    axis.title = element_text(face = &quot;italic&quot;),
-    panel.background = element_rect(fill = &quot;lightblue&quot;), 
-    panel.grid.major.x = element_blank(),
-    panel.grid.minor.x = element_blank(),
-    panel.grid.major.y = element_line(color = &quot;blue&quot;),
-    panel.grid.minor.y = element_blank(),
-    plot.background = element_rect(fill = &quot;lightblue&quot;)
-  )</code></pre>
-<p><img src="lab-04_files/figure-html/custom-plot-1.png" width="624" /></p>
+<div id="section-anova" class="section level2">
+<h2>ANOVA</h2>
+<p>For this lab, we will be peaking at section 7.5 (without worry about
+all the formulas). The analysis of variance - anova - test is equivalent
+to the chi-squared test but for numeric data instead of categorical
+data; It will compare the means of three or more samples.</p>
+<p>We will be going back to the diamonds data set and running an anova
+test to see if there is a difference in the average price of diamonds
+based on clarity. We will nest the test inside a <code>summary()</code>
+function to get the test and print out of results in one line.</p>
+<pre class="r"><code>summary(aov(price ~ clarity, data = diamonds))
+#&gt;                Df    Sum Sq   Mean Sq F value Pr(&gt;F)    
+#&gt; clarity         7 2.331e+10 3.330e+09     215 &lt;2e-16 ***
+#&gt; Residuals   53932 8.352e+11 1.549e+07                   
+#&gt; ---
+#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>The important parts of this print out are the <span
+class="math inline">\(F\)</span> value and <span
+class="math inline">\(Pr(&gt;F)\)</span>. The <span
+class="math inline">\(F\)</span> value is similar to a <span
+class="math inline">\(z\)</span> or <span
+class="math inline">\(t\)</span> score. The <span
+class="math inline">\(Pr(&gt;F)\)</span> is a p-value.</p>
+<p>Using the p-value method, <span
+class="math inline">\(&lt;2e-16\)</span> means the p-value is less than
+<span class="math inline">\(0.0000000000000002\)</span>. Using any of
+the typical values for alpha, we would reject our null hypothesis and
+can say there is a difference in the average price of diamonds based on
+their clarity rating.</p>
+<p>Using the classic method, we need to calculate a critical F
+value.</p>
+<pre class="r"><code>qf(0.95, #1-alpha
+   df1 = 7,
+   df2 = 53932)
+#&gt; [1] 2.00976</code></pre>
+<p>This means our critical region starts at approximately <span
+class="math inline">\(F = 2\)</span>, and our test statistic is <span
+class="math inline">\(F = 215\)</span>. We are well into the critical
+region and again conclude that there is a difference in the average
+price of diamonds based on their clarity.</p>
 </div>
 <div id="section-your-turn" class="section level2">
 <h2>Your Turn!</h2>
-<p>Create a custom version of your histogram from lab 3. It should
-include one (or more):</p>
-<p>*change to text</p>
-<p>*change to panel</p>
-<p>*change to plot</p>
-<p>*change to histogram/boxplot</p>
-<div class="tutorial-exercise" data-label="custom-data-viz"
+<p>Use the classic <em>and</em> p-value method to determine if there is
+a difference in the average price of diamonds based on the color of the
+diamond.</p>
+<div class="tutorial-exercise" data-label="price-aov"
 data-completion="1" data-diagnostics="1" data-startover="1"
 data-lines="0">
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
 </div>
-<div class="tutorial-exercise-support" data-label="custom-data-viz-hint"
+<div class="tutorial-exercise-support" data-label="price-aov-hint"
 data-completion="1" data-diagnostics="1" data-startover="1"
 data-lines="0">
-<pre class="text"><code>ggplot(data = gpa_study_hours, aes(x = study_hours)) + 
-  geom_histogram(fill = ___,
-                 color = ___, 
-                 binwidth = ___) +
-  labs(
-    title = &quot;Study Hours per week&quot;, 
-    subtitle = &quot;For 193 introductory statistics students&quot;,
-    x = &quot;Study Hours&quot;,
-    y = &quot;Number of Students&quot;,
-    caption = &quot;Source: Private US University, 2012&quot;
-  ) +
-  theme(
-    title = element_text(____),
-    panel.background = element_rect(____),
-    plot.background = element_rect(____)
-  )</code></pre>
+<pre class="text"><code># P-Value
+summary(aov(___ ~ ___, data = diamonds))
+
+# Conclusion: 
+
+#-------------------------------------------------------------------------------
+# Classic
+qf(0.95, #1-alpha
+   df1 = ____,
+   df2 = ____)
+
+# Conclusion</code></pre>
 </div>
-<div class="tutorial-exercise-support"
-data-label="custom-data-viz-solution" data-completion="1"
-data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code># NOTE: There are many possible correct solutions. 
-ggplot(data = gpa_study_hours, aes(x = study_hours)) + 
-  geom_histogram(fill = &quot;goldenrod3&quot;,
-                 color = &quot;white&quot;, 
-                 binwidth = 5) +
-  labs(
-    title = &quot;Study Hours per week&quot;, 
-    subtitle = &quot;For 193 introductory statistics students&quot;,
-    x = &quot;Study Hours&quot;,
-    y = &quot;Number of Students&quot;,
-    caption = &quot;Source: Private US University, 2012&quot;
-  ) +
-  theme(
-    title = element_text(color = &quot;white&quot;),
-    panel.background = element_rect(fill = &quot;red4&quot;),
-    plot.background = element_rect(fill = &quot;red4&quot;)
-  )</code></pre>
+<div class="tutorial-exercise-support" data-label="price-aov-solution"
+data-completion="1" data-diagnostics="1" data-startover="1"
+data-lines="0">
+<pre class="text"><code># P-Value
+summary(aov(price ~ color, data = diamonds))
+
+# Conclusion: Reject the null hypothesis. The average price of a diamond is different depending on color.
+
+#-------------------------------------------------------------------------------
+# Classic
+qf(0.95, #1-alpha
+   df1 = 6,
+   df2 = 53932)
+
+# Conclusion: Reject the null hypothesis. The average price of a diamond is different depending on color.</code></pre>
 </div>
 </div>
 <div id="section-submit" class="section level2">
 <h2>Submit</h2>
-<p>Congratulations! You’ve completed our fourth lab day! Please enter
+<p>Congratulations! You’ve completed our sixth lab day! Please enter
 your name and student ID below, then click <code>Generate</code>.
 Copy/paste the hash code into your submission on Sakai.</p>
 <div class="encoder_ui">
@@ -281,7 +210,7 @@ solutions, please enter your identifying information, then click the button belo
 <label class="control-label" id="studentID-label" for="studentID">What is your student ID?</label>
 <input id="studentID" type="text" class="shiny-input-text form-control" value=""/>
 </div>
-<div id="out8c6a408fc2df9cdb" class="shiny-text-output"></div>
+<div id="out031954c70eedd761" class="shiny-text-output"></div>
 </div>
 <div class="row" style="padding-bottom: 0.5em;">
 <div class="col-sm-3">
@@ -365,36 +294,30 @@ session$onSessionEnded(function() {
 
 
 <script type="application/shiny-prerendered" data-context="server">
-`tutorial-exercise-custom-data-viz-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-custom-data-viz-code-editor`)), session)
-output$`tutorial-exercise-custom-data-viz-output` <- renderUI({
-  `tutorial-exercise-custom-data-viz-result`()
+`tutorial-exercise-price-aov-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-price-aov-code-editor`)), session)
+output$`tutorial-exercise-price-aov-output` <- renderUI({
+  `tutorial-exercise-price-aov-result`()
 })
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache(structure(list(label = "custom-data-viz", global_setup = NULL, 
-    setup = NULL, chunks = list(list(label = "custom-data-viz", 
-        code = "", opts = list(label = "\"custom-data-viz\"", 
-            exercise = "TRUE"), engine = "r")), code_check = NULL, 
-    error_check = NULL, check = NULL, solution = structure(c("# NOTE: There are many possible correct solutions. ", 
-    "ggplot(data = gpa_study_hours, aes(x = study_hours)) + ", 
-    "  geom_histogram(fill = \"goldenrod3\",", "                 color = \"white\", ", 
-    "                 binwidth = 5) +", "  labs(", "    title = \"Study Hours per week\", ", 
-    "    subtitle = \"For 193 introductory statistics students\",", 
-    "    x = \"Study Hours\",", "    y = \"Number of Students\",", 
-    "    caption = \"Source: Private US University, 2012\"", 
-    "  ) +", "  theme(", "    title = element_text(color = \"white\"),", 
-    "    panel.background = element_rect(fill = \"red4\"),", 
-    "    plot.background = element_rect(fill = \"red4\")", "  )"
-    ), chunk_opts = list(label = "custom-data-viz-solution")), 
-    tests = NULL, options = list(eval = FALSE, echo = TRUE, results = "markup", 
+learnr:::store_exercise_cache(structure(list(label = "price-aov", global_setup = NULL, setup = NULL, 
+    chunks = list(list(label = "price-aov", code = "", opts = list(
+        label = "\"price-aov\"", exercise = "TRUE"), engine = "r")), 
+    code_check = NULL, error_check = NULL, check = NULL, solution = structure(c("# P-Value", 
+    "summary(aov(price ~ color, data = diamonds))", "", "# Conclusion: Reject the null hypothesis. The average price of a diamond is different depending on color.", 
+    "", "#-------------------------------------------------------------------------------", 
+    "# Classic", "qf(0.95, #1-alpha", "   df1 = 6,", "   df2 = 53932)", 
+    "", "# Conclusion: Reject the null hypothesis. The average price of a diamond is different depending on color."
+    ), chunk_opts = list(label = "price-aov-solution")), tests = NULL, 
+    options = list(eval = FALSE, echo = TRUE, results = "markup", 
         tidy = FALSE, tidy.opts = NULL, collapse = TRUE, prompt = FALSE, 
         comment = NA, highlight = FALSE, size = "normalsize", 
         background = "#F7F7F7", strip.white = FALSE, cache = 0, 
-        cache.path = "lab-04_cache/html/", cache.vars = NULL, 
+        cache.path = "lab-06_cache/html/", cache.vars = NULL, 
         cache.lazy = TRUE, dependson = NULL, autodep = FALSE, 
         cache.rebuild = FALSE, fig.keep = "high", fig.show = "asis", 
-        fig.align = "default", fig.path = "lab-04_files/figure-html/", 
+        fig.align = "default", fig.path = "lab-06_files/figure-html/", 
         dev = "png", dev.args = NULL, dpi = 192, fig.ext = "png", 
         fig.width = 6.5, fig.height = 4, fig.env = "figure", 
         fig.cap = NULL, fig.scap = NULL, fig.lp = "fig:", fig.subcap = NULL, 
@@ -403,8 +326,8 @@ learnr:::store_exercise_cache(structure(list(label = "custom-data-viz", global_s
         aniopts = "controls,loop", warning = FALSE, error = FALSE, 
         message = FALSE, render = NULL, ref.label = NULL, child = NULL, 
         engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, label = "custom-data-viz", exercise = TRUE, 
-        code = "", out.width.px = 624, out.height.px = 384, params.src = "custom-data-viz, exercise = TRUE", 
+        max.print = 1000, label = "price-aov", exercise = TRUE, 
+        code = "", out.width.px = 624, out.height.px = 384, params.src = "price-aov, exercise = TRUE", 
         fig.num = 0L, exercise.df_print = "paged", exercise.checker = "NULL"), 
     engine = "r", version = "4"), class = c("r", "tutorial_exercise"
 )))
@@ -422,7 +345,7 @@ inteRactive231::encoder_logic()
 <!--/html_preserve-->
 <!--html_preserve-->
 <script type="application/shiny-prerendered" data-context="execution_dependencies">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75]}},"value":[{"type":"character","attributes":{},"value":["airports","backports","base","bslib","cachem","checkmate","cherryblossom","cli","colorspace","compiler","datasets","digest","dplyr","ellipsis","evaluate","fansi","farver","fastmap","fontawesome","generics","ggplot2","ggthemes","glue","graphics","grDevices","grid","gtable","highr","hms","htmltools","htmlwidgets","httpuv","inteRactive231","jquerylib","jsonlite","knitr","labeling","later","learnr","learnrhash","lifecycle","magrittr","methods","mime","munsell","openintro","pillar","pkgconfig","promises","purrr","R6","Rcpp","readr","rlang","rmarkdown","rprojroot","rstudioapi","sass","scales","shiny","stats","stringi","stringr","tibble","tidyselect","tools","tzdb","usdata","utf8","utils","vctrs","withr","xfun","xtable","yaml"]},{"type":"character","attributes":{},"value":["0.1.0","1.4.1","4.3.0","0.5.1","1.0.8","2.2.0","0.1.0","3.6.1","2.1-0","4.3.0","4.3.0","0.6.33","1.1.2","0.3.2","0.21","1.0.4","2.1.1","1.1.1","0.5.1","0.1.3","3.4.3","4.2.4","1.6.2","4.3.0","4.3.0","4.3.0","0.3.3","0.10","1.1.3","0.5.6","1.6.2","1.6.11","0.0.0.9000","0.1.4","1.8.7","1.43","0.4.2","1.3.1","0.11.4","0.2.0","1.0.3","2.0.3","4.3.0","0.12","0.5.0","2.4.0","1.9.0","2.0.3","1.2.1","1.0.2","2.5.1","1.0.11","2.1.4","1.1.1","2.24","2.0.3","0.15.0","0.4.7","1.2.1","1.7.5","4.3.0","1.7.12","1.5.0","3.2.1","1.2.0","4.3.0","0.4.0","0.2.0","1.2.3","4.3.0","0.6.3","2.5.0","0.40","1.8-4","2.3.7"]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68]}},"value":[{"type":"character","attributes":{},"value":["airports","backports","base","bslib","cachem","checkmate","cherryblossom","cli","colorspace","compiler","datasets","digest","dplyr","ellipsis","evaluate","fansi","fastmap","fontawesome","generics","ggplot2","glue","graphics","grDevices","grid","gtable","hms","htmltools","htmlwidgets","httpuv","inteRactive231","jquerylib","jsonlite","knitr","later","learnr","learnrhash","lifecycle","magrittr","methods","mime","munsell","openintro","pillar","pkgconfig","promises","R6","Rcpp","readr","rlang","rmarkdown","rprojroot","rstudioapi","sass","scales","shiny","stats","tibble","tidyselect","tools","tzdb","usdata","utf8","utils","vctrs","withr","xfun","xtable","yaml"]},{"type":"character","attributes":{},"value":["0.1.0","1.4.1","4.3.0","0.5.1","1.0.8","2.2.0","0.1.0","3.6.1","2.1-0","4.3.0","4.3.0","0.6.33","1.1.2","0.3.2","0.21","1.0.4","1.1.1","0.5.1","0.1.3","3.4.3","1.6.2","4.3.0","4.3.0","4.3.0","0.3.3","1.1.3","0.5.6","1.6.2","1.6.11","0.0.0.9000","0.1.4","1.8.7","1.43","1.3.1","0.11.4","0.2.0","1.0.3","2.0.3","4.3.0","0.12","0.5.0","2.4.0","1.9.0","2.0.3","1.2.1","2.5.1","1.0.11","2.1.4","1.1.1","2.24","2.0.3","0.15.0","0.4.7","1.2.1","1.7.5","4.3.0","3.2.1","1.2.0","4.3.0","0.4.0","0.2.0","1.2.3","4.3.0","0.6.3","2.5.0","0.40","1.8-4","2.3.7"]}]}]}
 </script>
 <!--/html_preserve-->
 </div>
@@ -436,8 +359,8 @@ inteRactive231::encoder_logic()
 
 <!-- begin doc-metadata -->
 <div id="doc-metadata">
-<h1 class="title toc-ignore" style="display:none;">Stat231::Lab4 - Data
-Viz Part II</h1>
+<h1 class="title toc-ignore" style="display:none;">Stat231::Lab6 -
+Analysis of Variance Test</h1>
 </div>
 <!-- end doc-metadata -->
 

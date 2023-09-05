@@ -1,5 +1,5 @@
 ---
-  title: "Stat231::Lab5 - Confidence Intervals and Hypothesis Tests"
+title: "Stat231::Lab5 - Confidence Intervals and Hypothesis Tests"
 output:
   learnr::tutorial:
   progressive: true
@@ -9,7 +9,7 @@ description: >
   Making Claims about a Population Based on Sample Data.
 ---
   
-  ```{r, include = FALSE}
+```{r, include = FALSE}
 knitr::opts_chunk$set(
   echo = FALSE,
   message = FALSE, 
@@ -22,41 +22,44 @@ library(dplyr)
 library(magrittr)
 library(infer)
 library(openintro)
+library(tidyr)
 library(inteRactive231)
 ```
 ## Making Claims about a Population Based on Sample Data
 
 As we've seen in chapter 6, we can calculate confidence intervals and conduct hypothesis test to make claims about proportions in our population but based on our sample. As you will see in chapter 7, we can also do this for averages. In this lab, we'll build an interval and conduct a hypothesis test for a single sample proportion and as well as a two-sample average (section 7.3). 
 
-We'll be using the `piracy` data set included in  our `Stat231` package. It contains data for each member of congress and money they received from lobby groups for (money_pro) and against (money_con) anti-piracy legislation. 
+We'll be using the `piracy` data set included in  our `inteRactive231` package. It contains data for each member of congress and money they received from lobby groups for (money_pro) and against (money_con) anti-piracy legislation. 
 
 ## Proportions
 
 For the proportion section, we'll conduct a hypothesis test to determine if a majority of a randomly chosen congress are Democrats. First, we'll need to make a new data set that contains the proportion of Democrats and Other parties. 
 
-```{r}
-prop_data <- Stat231::piracy
+```{r democrat-summary, echo = TRUE}
+prop_data <- inteRactive231::piracy
 
 prop_data$party <- recode(prop_data$party, "D" = 1, .default = 0)
 prop_data$party <- as.double(prop_data$party)
 
-dem_count <- prop_data %>% 
+dem_count <- prop_data |>  
   summarize(democrats = sum(party),
             other = n()- democrats,
             total = n(),
             democrats_prop = democrats/total,
             other_prop = other/total)
+
+print(dem_count)
 ```
 
-There is a function, `prop.test()`, that calculates the test and interval for us. However, it is not a true 1 proportion z test. Instead it runs a chi-squared test assuming that the distribution is binomial. We'll use the `categorical_z` function from our `Stat231` package. The function has arguments of sample proportion, (assumed) population proportion and sample size.
+There is a function, `prop.test()`, that calculates the test and interval for us. However, it is not a true 1 proportion z test. Instead it runs a chi-squared test assuming that the distribution is binomial. We'll use the `categorical_z` function from our `inteRactive231` package. The function has arguments of sample proportion, (assumed) population proportion and sample size.
 
 $H_0: p = 0.50$
   
-  $H_1: p > 0.50$
+$H_1: p > 0.50$
   
-  $\alpha = 0.05 \rightarrow Z* = 1.645$
+$\alpha = 0.05 \rightarrow Z* = 1.645$
   
-  ```{r}
+```{r democrat-hypothesis test, echo = TRUE}
 z <- categorical_z(dem_count$democrats_prop, 0.50, dem_count$total) #calculate z score
 z # print z score
 
@@ -70,10 +73,9 @@ Using the p-value method, our p-value is much greater than alpha so we fail to r
 
 If there is not a majority, what proportion of Democrats can we expect? This is where our confidence interval comes in. We'll still use $\alpha = 0.05$; however, $Z*$ will change since we are now using two-tails. The function will change $Z*$ for us behind the scenes.
 
-```{r}
+```{r democrate-confidence-interval, echo = TRUE}
 prop_ci(dem_count$democrats_prop, 0.05, dem_count$total)
 ```
-
 
 We can expect a randomly chosen congress to be between 41.28% Democrat and 49.73 % Other.
 
@@ -83,18 +85,18 @@ For our means section Our test/interval will be to determine if there is a diffe
 
 To clean our data, we'll need to replace missing values with 0 (rationale discussed in lab/the screencast), create a new variable for the sum of money received and filter our the few Independent party observations. 
 
-```{r}
-summary_data <- Stat231::piracy %>% 
+```{r pro-con-setup, echo = TRUE}
+summary_data <- inteRactive231::piracy |>  
   mutate(money_pro = replace_na(money_pro, 0), 
-         money_con = replace_na(money_con,0),
-         money_total = money_pro+money_con) %>% 
-  select(-c(money_pro, money_con)) %>%  
-  filter(party!= "I")
+         money_con = replace_na(money_con, 0),
+         money_total = money_pro+money_con) |>  
+  select(-c(money_pro, money_con)) |> 
+  dplyr::filter(party != "I")
 ```
 
 Now we're ready to run our test.
 
-```{r}
+```{r pro-con-test, echo = TRUE}
 t_test(summary_data, #choose the data frame
        formula = money_total~party, #define the relationship/variables for testing
        order = c("D","R"), #choose an order for the mean difference to be calculated
@@ -106,29 +108,109 @@ t_test(summary_data, #choose the data frame
 ```
 
 From the output, we can conclude there is a difference. Based on the interval is appears that Democrats received more money in relation to the anti-piracy legislation.
-### Problem One:
 
-Conduct a hypothesis test to determine if a majority of a randomly chosen congress is Republican. Calculate the confidence interval as well. You'll need to *recode* your data similar to the example in the lesson.
+## Your Turn!
 
-```{r}
-#INSERT YOUR CODE HERE
+Conduct a hypothesis test to determine if a majority of a randomly chosen congress is Republican. Calculate the confidence interval as well. You'll need to *recode* your data similar to the example in the lesson. 
+
+```{r rep-hypothesis-test, exercise = TRUE}
+
+# Conclusion goes here.
 ```
 
-#### Conclusion to hypothesis test:
+```{r rep-hypothesis-test-hint}
+prop_data <- inteRactive231::piracy
 
-### Problem Two:
+prop_data$party <- recode(prop_data$party, "_" = 1, .default = 0)
+prop_data$party <- as.double(prop_data$party)
+
+rep_count <- prop_data |>  
+  summarize(____ = sum(party),
+            other = n() - ____,
+            total = n(),
+            republicans_prop = ____/total,
+            other_prop = other/total)
+
+z <- ____(rep_count$republicans_prop, 0.50, rep_count$total) 
+z 
+
+pval <- ____(z, lower.tail = FALSE) 
+pval
+
+# Fail to reject the null hypothesis. We don't have evidence to show a randomly chosen congress is mostly Republican.
+```
+
+```{r rep-hypothesis-test-solution}
+prop_data <- inteRactive231::piracy
+
+prop_data$party <- recode(prop_data$party, "R" = 1, .default = 0)
+prop_data$party <- as.double(prop_data$party)
+
+rep_count <- prop_data |>  
+  summarize(republicans = sum(party),
+            other = n() - republicans,
+            total = n(),
+            republicans_prop = republicans/total,
+            other_prop = other/total)
+
+z <- categorical_z(rep_count$republicans_prop, 0.50, rep_count$total) 
+z 
+
+pval <- pnorm(z, lower.tail = FALSE) 
+pval
+
+# Fail to reject the null hypothesis. We don't have evidence to show a randomly chosen congress is mostly Republican.
+```
+
+
+## Your Turn!
 
 Determine if there is a difference in money received from pro lobby groups and con lobby groups (test and interval). You'll need to clean the data by replacing missing values with 0 and filtering to a single political party of your choice.
 
-```{r}
-#INSERT YOUR CODE HERE
+```{r party-test, exercise = TRUE}
+
+# Conclusion goes here.
 ```
 
-#### Conclusion to hypothesis test:
+```{r party-test-hint, exercise = TRUE}
+test_data <- inteRactive231::piracy |>  
+  mutate(money_pro = replace_na(money_pro, 0), 
+         money_con = replace_na(money_con, 0)) |>  
+  pivot_longer(cols = c("_____", "_____"), names_to = "lobby_group", values_to = "amount") |> 
+  dplyr::filter(party == "_____")
+
+t_test(test_data, 
+       formula = ____ ~ ____, 
+       order = c("____","money_con"), 
+       mu = 0, 
+       alternative = "two.sided", 
+       var.equal = TRUE, 
+       conf_int = TRUE, 
+       conf_level = 0.99)
+# Conclusion goes here.
+```
+
+```{r party-test-solution}
+test_data <- inteRactive231::piracy |>  
+  mutate(money_pro = replace_na(money_pro, 0), 
+         money_con = replace_na(money_con, 0)) |>  
+  pivot_longer(cols = c("money_pro", "money_con"), names_to = "lobby_group", values_to = "amount") |> 
+  dplyr::filter(party == "D")
+
+t_test(test_data, 
+       formula = amount ~ lobby_group, 
+       order = c("money_pro","money_con"), 
+       mu = 0, 
+       alternative = "two.sided", 
+       var.equal = TRUE, 
+       conf_int = TRUE, 
+       conf_level = 0.99)
+# Fail to reject null hypothesis; there is not enough evidence to support the claim that Democrats received more funds from one lobby group than another.
+```
 
 ## Submit
 
-Congratulations! You've completed our fourth lab day! Please enter your name and student ID below, then click `Generate`. Copy/paste the hash code into your submission on Sakai. 
+Congratulations! You've completed our fifth lab day! Please enter your name and student ID below, then click `Generate`. Copy/paste the hash code into your submission on Sakai. 
 
 ```{r, echo=FALSE, context = "server"}
 inteRactive231::encoder_logic()

@@ -52,14 +52,14 @@ First I'm going to adjust my *text*. I'd prefer to have my title a little larger
 ```{r custom-text, echo = TRUE}
 ggplot(data = gpa_study_hours, 
        aes(x = gpa))+
-  geom_histogram(color = "White", binwidth = 0.25)+
+  geom_histogram(color = "White", binwidth = 0.25) +
   labs(
     title = "Distribution of Grade Point Average",
     subtitle = "For 193 Introductory Statistics Students",
     x = "GPA",
     y = "Number of Students",
     caption = "Source: Private US University, 2012"
-  )+
+  ) +
   theme(
     title = element_text(size = 16,
                          family = "serif"),
@@ -73,7 +73,7 @@ Next, I'm going to adjust the *panel* the plot is on. I'll change the background
 
 ```{r custom-panel, echo = TRUE}
 ggplot(data = gpa_study_hours, 
-       aes(x = gpa))+
+       aes(x = gpa)) +
   geom_histogram(color = "White", binwidth = 0.25)+
   labs(
     title = "Distribution of Grade Point Average",
@@ -81,7 +81,7 @@ ggplot(data = gpa_study_hours,
     x = "GPA",
     y = "Number of Students",
     caption = "Source: Private US University, 2012"
-  )+
+  ) +
   theme(
     title = element_text(size = 16,
                          family = "serif"),
@@ -100,7 +100,7 @@ My next step will be to address the *plot* background (the white space behind th
 
 ```{r custom-plot, echo = TRUE}
 ggplot(data = gpa_study_hours, 
-       aes(x = gpa))+
+       aes(x = gpa)) +
   geom_histogram(fill = "aquamarine4",
                  color = "lightblue", 
                  binwidth = 0.25)+
@@ -110,7 +110,7 @@ ggplot(data = gpa_study_hours,
     x = "GPA",
     y = "Number of Students",
     caption = "Source: Private US University, 2012"
-  )+
+  ) +
   theme(
     title = element_text(size = 16,
                          family = "serif"),

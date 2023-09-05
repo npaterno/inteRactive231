@@ -1,26 +1,100 @@
 ---
-title: "Analysis of Variance Assignment"
-author: ""
-date: ""
-output: html_document
+title: "Stat231::Lab6 - Analysis of Variance Test"
+output:
+  learnr::tutorial:
+  progressive: true
+allow_skip: true
+runtime: shiny_prerendered
+description: >
+  For this lab, we will be peaking at section 7.5 (without worry about all the formulas). The analysis of variance - anova - test is equivalent to the chi-squared test but for numeric data instead of categorical data; It will compare the means of three or more samples. 
 ---
+  
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE, 
+  warning = FALSE,
+  collapse = TRUE,
+  comment = "#>")
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-library(tidyverse)
+library(learnr)
+library(dplyr)
+library(magrittr)
 library(openintro)
+library(ggplot2)
+library(inteRactive231)
 ```
 
-### Problem One: 
-Use the classic and p-value method to determine if there is a difference in the average price of diamonds based on the color of the diamond. 
+## ANOVA
 
-```{r}
-# CODE BLOCK FOR YOUR ANOVA TEST
+For this lab, we will be peaking at section 7.5 (without worry about all the formulas). The analysis of variance - anova - test is equivalent to the chi-squared test but for numeric data instead of categorical data; It will compare the means of three or more samples. 
+
+We will be going back to the diamonds data set and running an anova test to see if there is a difference in the average price of diamonds based on clarity. We will nest the test inside a `summary()` function to get the test and print out of results in one line. 
+
+
+```{r one-line-aov, echo = TRUE}
+summary(aov(price ~ clarity, data = diamonds))
 ```
 
-```{r}
-# CODE BLOCK FOR CALCULATING CRITICAL F
-```
-#### Conclusion for p-value method:
+The important parts of this print out are the $F$ value and $Pr(>F)$. The $F$ value is similar to a $z$ or $t$ score. The $Pr(>F)$ is a p-value. 
 
-#### Conclusion for classic method:
+Using the p-value method, $<2e-16$ means the p-value is less than $0.0000000000000002$. Using any of the typical values for alpha, we would reject our null hypothesis and can say there is a difference in the average price of diamonds based on their clarity rating.
+
+Using the classic method, we need to calculate a critical F value. 
+
+```{r f-statistic, echo = TRUE}
+qf(0.95, #1-alpha
+   df1 = 7,
+   df2 = 53932)
+```
+
+This means our critical region starts at approximately $F = 2$, and our test statistic is $F = 215$. We are well into the critical region and again conclude that there is a difference in the average price of diamonds based on their clarity. 
+
+## Your Turn!
+Use the classic *and* p-value method to determine if there is a difference in the average price of diamonds based on the color of the diamond. 
+
+```{r price-aov, exercise = TRUE}
+
+```
+
+```{r price-aov-hint}
+# P-Value
+summary(aov(___ ~ ___, data = diamonds))
+
+# Conclusion: 
+
+#-------------------------------------------------------------------------------
+# Classic
+qf(0.95, #1-alpha
+   df1 = ____,
+   df2 = ____)
+
+# Conclusion
+```
+
+```{r price-aov-solution}
+# P-Value
+summary(aov(price ~ color, data = diamonds))
+
+# Conclusion: Reject the null hypothesis. The average price of a diamond is different depending on color.
+
+#-------------------------------------------------------------------------------
+# Classic
+qf(0.95, #1-alpha
+   df1 = 6,
+   df2 = 53932)
+
+# Conclusion: Reject the null hypothesis. The average price of a diamond is different depending on color.
+```
+
+## Submit
+
+Congratulations! You've completed our sixth lab day! Please enter your name and student ID below, then click `Generate`. Copy/paste the hash code into your submission on Sakai. 
+
+```{r, echo=FALSE, context = "server"}
+inteRactive231::encoder_logic()
+```
+
+```{r encode, echo=FALSE}
+learnrhash::encoder_ui(ui_before = hash_encoder_ui())
+```
