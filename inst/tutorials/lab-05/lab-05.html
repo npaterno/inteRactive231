@@ -349,7 +349,7 @@ solutions, please enter your identifying information, then click the button belo
 <label class="control-label" id="studentID-label" for="studentID">What is your student ID?</label>
 <input id="studentID" type="text" class="shiny-input-text form-control" value=""/>
 </div>
-<div id="outc6388868caaf7ad2" class="shiny-text-output"></div>
+<div id="outf06e260f274774fb" class="shiny-text-output"></div>
 </div>
 <div class="row" style="padding-bottom: 0.5em;">
 <div class="col-sm-3">
@@ -412,39 +412,62 @@ solutions, please enter your identifying information, then click the button belo
       });</script>
 </div>
 <p>
+<script type="application/shiny-prerendered" data-context="server-start">
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE, 
+  warning = FALSE,
+  collapse = TRUE,
+  comment = "#>")
+
+library(learnr)
+library(dplyr)
+library(magrittr)
+library(infer)
+library(openintro)
+library(tidyr)
+library(inteRactive231)
+</script>
+ 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::register_http_handlers(session, metadata = NULL)
 </script>
- 
+
+
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::prepare_tutorial_state(session)
 </script>
-
-
+ 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::i18n_observe_tutorial_language(input, session)
 </script>
- 
+
+
 <script type="application/shiny-prerendered" data-context="server">
 session$onSessionEnded(function() {
         learnr:::event_trigger(session, "session_stop")
       })
 </script>
-
-
+ 
 <script type="application/shiny-prerendered" data-context="server">
 `tutorial-exercise-rep-hypothesis-test-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-rep-hypothesis-test-code-editor`)), session)
 output$`tutorial-exercise-rep-hypothesis-test-output` <- renderUI({
   `tutorial-exercise-rep-hypothesis-test-result`()
 })
 </script>
- 
+
+
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache(structure(list(label = "rep-hypothesis-test", global_setup = NULL, 
-    setup = NULL, chunks = list(list(label = "rep-hypothesis-test", 
-        code = "\n# Conclusion goes here.", opts = list(label = "\"rep-hypothesis-test\"", 
-            exercise = "TRUE"), engine = "r")), code_check = NULL, 
-    error_check = NULL, check = NULL, solution = structure(c("prop_data <- inteRactive231::piracy", 
+learnr:::store_exercise_cache(structure(list(label = "rep-hypothesis-test", global_setup = structure(c("knitr::opts_chunk$set(", 
+"  echo = FALSE,", "  message = FALSE, ", "  warning = FALSE,", 
+"  collapse = TRUE,", "  comment = \"#>\")", "", "library(learnr)", 
+"library(dplyr)", "library(magrittr)", "library(infer)", "library(openintro)", 
+"library(tidyr)", "library(inteRactive231)"), chunk_opts = list(
+    label = "setup", include = FALSE)), setup = NULL, chunks = list(
+    list(label = "rep-hypothesis-test", code = "\n# Conclusion goes here.", 
+        opts = list(label = "\"rep-hypothesis-test\"", exercise = "TRUE"), 
+        engine = "r")), code_check = NULL, error_check = NULL, 
+    check = NULL, solution = structure(c("prop_data <- inteRactive231::piracy", 
     "", "prop_data$party <- recode(prop_data$party, \"R\" = 1, .default = 0)", 
     "prop_data$party <- as.double(prop_data$party)", "", "rep_count <- prop_data |>  ", 
     "  summarize(republicans = sum(party),", "            other = n() - republicans,", 
@@ -476,18 +499,23 @@ learnr:::store_exercise_cache(structure(list(label = "rep-hypothesis-test", glob
     engine = "r", version = "4"), class = c("r", "tutorial_exercise"
 )))
 </script>
-
-
+ 
 <script type="application/shiny-prerendered" data-context="server">
 `tutorial-exercise-party-test-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-party-test-code-editor`)), session)
 output$`tutorial-exercise-party-test-output` <- renderUI({
   `tutorial-exercise-party-test-result`()
 })
 </script>
- 
+
+
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache(structure(list(label = "party-test", global_setup = NULL, setup = NULL, 
-    chunks = list(list(label = "party-test", code = "\n# Conclusion goes here.", 
+learnr:::store_exercise_cache(structure(list(label = "party-test", global_setup = structure(c("knitr::opts_chunk$set(", 
+"  echo = FALSE,", "  message = FALSE, ", "  warning = FALSE,", 
+"  collapse = TRUE,", "  comment = \"#>\")", "", "library(learnr)", 
+"library(dplyr)", "library(magrittr)", "library(infer)", "library(openintro)", 
+"library(tidyr)", "library(inteRactive231)"), chunk_opts = list(
+    label = "setup", include = FALSE)), setup = NULL, chunks = list(
+    list(label = "party-test", code = "\n# Conclusion goes here.", 
         opts = list(label = "\"party-test\"", exercise = "TRUE"), 
         engine = "r")), code_check = NULL, error_check = NULL, 
     check = NULL, solution = structure(c("test_data <- inteRactive231::piracy |>  ", 
@@ -522,19 +550,23 @@ learnr:::store_exercise_cache(structure(list(label = "party-test", global_setup 
     engine = "r", version = "4"), class = c("r", "tutorial_exercise"
 )))
 </script>
-
-
+ 
 <script type="application/shiny-prerendered" data-context="server">
 `tutorial-exercise-party-test-hint-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-party-test-hint-code-editor`)), session)
 output$`tutorial-exercise-party-test-hint-output` <- renderUI({
   `tutorial-exercise-party-test-hint-result`()
 })
 </script>
- 
+
+
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache(structure(list(label = "party-test-hint", global_setup = NULL, 
-    setup = NULL, chunks = list(list(label = "party-test-hint", 
-        code = "test_data <- inteRactive231::piracy |>  \n  mutate(money_pro = replace_na(money_pro, 0), \n         money_con = replace_na(money_con, 0)) |>  \n  pivot_longer(cols = c(\"_____\", \"_____\"), names_to = \"lobby_group\", values_to = \"amount\") |> \n  dplyr::filter(party == \"_____\")\n\nt_test(test_data, \n       formula = ____ ~ ____, \n       order = c(\"____\",\"money_con\"), \n       mu = 0, \n       alternative = \"two.sided\", \n       var.equal = TRUE, \n       conf_int = TRUE, \n       conf_level = 0.99)\n# Conclusion goes here.", 
+learnr:::store_exercise_cache(structure(list(label = "party-test-hint", global_setup = structure(c("knitr::opts_chunk$set(", 
+"  echo = FALSE,", "  message = FALSE, ", "  warning = FALSE,", 
+"  collapse = TRUE,", "  comment = \"#>\")", "", "library(learnr)", 
+"library(dplyr)", "library(magrittr)", "library(infer)", "library(openintro)", 
+"library(tidyr)", "library(inteRactive231)"), chunk_opts = list(
+    label = "setup", include = FALSE)), setup = NULL, chunks = list(
+    list(label = "party-test-hint", code = "test_data <- inteRactive231::piracy |>  \n  mutate(money_pro = replace_na(money_pro, 0), \n         money_con = replace_na(money_con, 0)) |>  \n  pivot_longer(cols = c(\"_____\", \"_____\"), names_to = \"lobby_group\", values_to = \"amount\") |> \n  dplyr::filter(party == \"_____\")\n\nt_test(test_data, \n       formula = ____ ~ ____, \n       order = c(\"____\",\"money_con\"), \n       mu = 0, \n       alternative = \"two.sided\", \n       var.equal = TRUE, \n       conf_int = TRUE, \n       conf_level = 0.99)\n# Conclusion goes here.", 
         opts = list(label = "\"party-test-hint\"", exercise = "TRUE"), 
         engine = "r")), code_check = NULL, error_check = NULL, 
     check = NULL, solution = NULL, tests = NULL, options = list(
@@ -567,8 +599,7 @@ learnr:::store_exercise_cache(structure(list(label = "party-test-hint", global_s
     engine = "r", version = "4"), class = c("r", "tutorial_exercise"
 )))
 </script>
-
-
+ 
 <script type="application/shiny-prerendered" data-context="server">
 inteRactive231::encoder_logic()
 </script>

@@ -9,7 +9,7 @@ description: >
   For this lab, we will once again be focusing on making clear, consice plots to present data. Instead of using a prebuilt themes, we will be creating our own unique visualizations. 
 ---
   
-```{r, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   echo = FALSE,
   message = FALSE, 

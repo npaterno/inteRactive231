@@ -210,7 +210,7 @@ solutions, please enter your identifying information, then click the button belo
 <label class="control-label" id="studentID-label" for="studentID">What is your student ID?</label>
 <input id="studentID" type="text" class="shiny-input-text form-control" value=""/>
 </div>
-<div id="out031954c70eedd761" class="shiny-text-output"></div>
+<div id="outd6a07699cb3be754" class="shiny-text-output"></div>
 </div>
 <div class="row" style="padding-bottom: 0.5em;">
 <div class="col-sm-3">
@@ -273,38 +273,60 @@ solutions, please enter your identifying information, then click the button belo
       });</script>
 </div>
 <p>
+<script type="application/shiny-prerendered" data-context="server-start">
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE, 
+  warning = FALSE,
+  collapse = TRUE,
+  comment = "#>")
+
+library(learnr)
+library(dplyr)
+library(magrittr)
+library(openintro)
+library(ggplot2)
+library(inteRactive231)
+</script>
+ 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::register_http_handlers(session, metadata = NULL)
 </script>
- 
+
+
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::prepare_tutorial_state(session)
 </script>
-
-
+ 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::i18n_observe_tutorial_language(input, session)
 </script>
- 
+
+
 <script type="application/shiny-prerendered" data-context="server">
 session$onSessionEnded(function() {
         learnr:::event_trigger(session, "session_stop")
       })
 </script>
-
-
+ 
 <script type="application/shiny-prerendered" data-context="server">
 `tutorial-exercise-price-aov-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-price-aov-code-editor`)), session)
 output$`tutorial-exercise-price-aov-output` <- renderUI({
   `tutorial-exercise-price-aov-result`()
 })
 </script>
- 
+
+
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache(structure(list(label = "price-aov", global_setup = NULL, setup = NULL, 
-    chunks = list(list(label = "price-aov", code = "", opts = list(
-        label = "\"price-aov\"", exercise = "TRUE"), engine = "r")), 
-    code_check = NULL, error_check = NULL, check = NULL, solution = structure(c("# P-Value", 
+learnr:::store_exercise_cache(structure(list(label = "price-aov", global_setup = structure(c("knitr::opts_chunk$set(", 
+"  echo = FALSE,", "  message = FALSE, ", "  warning = FALSE,", 
+"  collapse = TRUE,", "  comment = \"#>\")", "", "library(learnr)", 
+"library(dplyr)", "library(magrittr)", "library(openintro)", 
+"library(ggplot2)", "library(inteRactive231)"), chunk_opts = list(
+    label = "setup", include = FALSE)), setup = NULL, chunks = list(
+    list(label = "price-aov", code = "", opts = list(label = "\"price-aov\"", 
+        exercise = "TRUE"), engine = "r")), code_check = NULL, 
+    error_check = NULL, check = NULL, solution = structure(c("# P-Value", 
     "summary(aov(price ~ color, data = diamonds))", "", "# Conclusion: Reject the null hypothesis. The average price of a diamond is different depending on color.", 
     "", "#-------------------------------------------------------------------------------", 
     "# Classic", "qf(0.95, #1-alpha", "   df1 = 6,", "   df2 = 53932)", 
@@ -332,8 +354,7 @@ learnr:::store_exercise_cache(structure(list(label = "price-aov", global_setup =
     engine = "r", version = "4"), class = c("r", "tutorial_exercise"
 )))
 </script>
-
-
+ 
 <script type="application/shiny-prerendered" data-context="server">
 inteRactive231::encoder_logic()
 </script>

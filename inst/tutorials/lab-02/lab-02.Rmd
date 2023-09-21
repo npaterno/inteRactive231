@@ -9,7 +9,7 @@ description: >
   For this lab, we will be looking at calculating summary statistics, such as a five number summary, as well as boxplots.
 ---
   
-```{r, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   echo = FALSE,
   message = FALSE, 

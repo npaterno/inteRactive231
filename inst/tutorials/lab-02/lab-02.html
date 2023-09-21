@@ -312,7 +312,7 @@ solutions, please enter your identifying information, then click the button belo
 <label class="control-label" id="studentID-label" for="studentID">What is your student ID?</label>
 <input id="studentID" type="text" class="shiny-input-text form-control" value=""/>
 </div>
-<div id="out115aa03455398f28" class="shiny-text-output"></div>
+<div id="out23a5e27a82f0f24b" class="shiny-text-output"></div>
 </div>
 <div class="row" style="padding-bottom: 0.5em;">
 <div class="col-sm-3">
@@ -375,39 +375,60 @@ solutions, please enter your identifying information, then click the button belo
       });</script>
 </div>
 <p>
+<script type="application/shiny-prerendered" data-context="server-start">
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE, 
+  warning = FALSE,
+  collapse = TRUE,
+  comment = "#>")
+
+library(learnr)
+library(dplyr)
+library(readr)
+library(magrittr)
+library(ggplot2)
+library(inteRactive231)
+</script>
+ 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::register_http_handlers(session, metadata = NULL)
 </script>
- 
+
+
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::prepare_tutorial_state(session)
 </script>
-
-
+ 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::i18n_observe_tutorial_language(input, session)
 </script>
- 
+
+
 <script type="application/shiny-prerendered" data-context="server">
 session$onSessionEnded(function() {
         learnr:::event_trigger(session, "session_stop")
       })
 </script>
-
-
+ 
 <script type="application/shiny-prerendered" data-context="server">
 `tutorial-exercise-carat-five-num-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-carat-five-num-code-editor`)), session)
 output$`tutorial-exercise-carat-five-num-output` <- renderUI({
   `tutorial-exercise-carat-five-num-result`()
 })
 </script>
- 
+
+
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache(structure(list(label = "carat-five-num", global_setup = NULL, 
-    setup = NULL, chunks = list(list(label = "carat-five-num", 
-        code = "", opts = list(label = "\"carat-five-num\"", 
-            exercise = "TRUE"), engine = "r")), code_check = NULL, 
-    error_check = NULL, check = NULL, solution = structure("fivenum(diamonds$carat)", chunk_opts = list(
+learnr:::store_exercise_cache(structure(list(label = "carat-five-num", global_setup = structure(c("knitr::opts_chunk$set(", 
+"  echo = FALSE,", "  message = FALSE, ", "  warning = FALSE,", 
+"  collapse = TRUE,", "  comment = \"#>\")", "", "library(learnr)", 
+"library(dplyr)", "library(readr)", "library(magrittr)", "library(ggplot2)", 
+"library(inteRactive231)"), chunk_opts = list(label = "setup", 
+    include = FALSE)), setup = NULL, chunks = list(list(label = "carat-five-num", 
+    code = "", opts = list(label = "\"carat-five-num\"", exercise = "TRUE"), 
+    engine = "r")), code_check = NULL, error_check = NULL, check = NULL, 
+    solution = structure("fivenum(diamonds$carat)", chunk_opts = list(
         label = "carat-five-num-solution")), tests = NULL, options = list(
         eval = FALSE, echo = TRUE, results = "markup", tidy = FALSE, 
         tidy.opts = NULL, collapse = TRUE, prompt = FALSE, comment = NA, 
@@ -430,20 +451,24 @@ learnr:::store_exercise_cache(structure(list(label = "carat-five-num", global_se
     engine = "r", version = "4"), class = c("r", "tutorial_exercise"
 )))
 </script>
-
-
+ 
 <script type="application/shiny-prerendered" data-context="server">
 `tutorial-exercise-carat-cut-five-num-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-carat-cut-five-num-code-editor`)), session)
 output$`tutorial-exercise-carat-cut-five-num-output` <- renderUI({
   `tutorial-exercise-carat-cut-five-num-result`()
 })
 </script>
- 
+
+
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache(structure(list(label = "carat-cut-five-num", global_setup = NULL, 
-    setup = NULL, chunks = list(list(label = "carat-cut-five-num", 
-        code = "", opts = list(label = "\"carat-cut-five-num\"", 
-            exercise = "TRUE"), engine = "r")), code_check = NULL, 
+learnr:::store_exercise_cache(structure(list(label = "carat-cut-five-num", global_setup = structure(c("knitr::opts_chunk$set(", 
+"  echo = FALSE,", "  message = FALSE, ", "  warning = FALSE,", 
+"  collapse = TRUE,", "  comment = \"#>\")", "", "library(learnr)", 
+"library(dplyr)", "library(readr)", "library(magrittr)", "library(ggplot2)", 
+"library(inteRactive231)"), chunk_opts = list(label = "setup", 
+    include = FALSE)), setup = NULL, chunks = list(list(label = "carat-cut-five-num", 
+    code = "", opts = list(label = "\"carat-cut-five-num\"", 
+        exercise = "TRUE"), engine = "r")), code_check = NULL, 
     error_check = NULL, check = NULL, solution = structure(c("diamonds |> ", 
     "  group_by(cut) |> ", "  summarize(min = fivenum(carat)[1],", 
     "            q1 = fivenum(carat)[2],", "            med = fivenum(carat)[3],", 
@@ -471,20 +496,25 @@ learnr:::store_exercise_cache(structure(list(label = "carat-cut-five-num", globa
     engine = "r", version = "4"), class = c("r", "tutorial_exercise"
 )))
 </script>
-
-
+ 
 <script type="application/shiny-prerendered" data-context="server">
 `tutorial-exercise-cut-freq-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-cut-freq-code-editor`)), session)
 output$`tutorial-exercise-cut-freq-output` <- renderUI({
   `tutorial-exercise-cut-freq-result`()
 })
 </script>
- 
+
+
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache(structure(list(label = "cut-freq", global_setup = NULL, setup = NULL, 
-    chunks = list(list(label = "cut-freq", code = "", opts = list(
-        label = "\"cut-freq\"", exercise = "TRUE"), engine = "r")), 
-    code_check = NULL, error_check = NULL, check = NULL, solution = structure("summary(diamonds$cut)", chunk_opts = list(
+learnr:::store_exercise_cache(structure(list(label = "cut-freq", global_setup = structure(c("knitr::opts_chunk$set(", 
+"  echo = FALSE,", "  message = FALSE, ", "  warning = FALSE,", 
+"  collapse = TRUE,", "  comment = \"#>\")", "", "library(learnr)", 
+"library(dplyr)", "library(readr)", "library(magrittr)", "library(ggplot2)", 
+"library(inteRactive231)"), chunk_opts = list(label = "setup", 
+    include = FALSE)), setup = NULL, chunks = list(list(label = "cut-freq", 
+    code = "", opts = list(label = "\"cut-freq\"", exercise = "TRUE"), 
+    engine = "r")), code_check = NULL, error_check = NULL, check = NULL, 
+    solution = structure("summary(diamonds$cut)", chunk_opts = list(
         label = "cut-freq-solution")), tests = NULL, options = list(
         eval = FALSE, echo = TRUE, results = "markup", tidy = FALSE, 
         tidy.opts = NULL, collapse = TRUE, prompt = FALSE, comment = NA, 
@@ -507,21 +537,25 @@ learnr:::store_exercise_cache(structure(list(label = "cut-freq", global_setup = 
     engine = "r", version = "4"), class = c("r", "tutorial_exercise"
 )))
 </script>
-
-
+ 
 <script type="application/shiny-prerendered" data-context="server">
 `tutorial-exercise-carat-boxplot-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-carat-boxplot-code-editor`)), session)
 output$`tutorial-exercise-carat-boxplot-output` <- renderUI({
   `tutorial-exercise-carat-boxplot-result`()
 })
 </script>
- 
+
+
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache(structure(list(label = "carat-boxplot", global_setup = NULL, 
-    setup = NULL, chunks = list(list(label = "carat-boxplot", 
-        code = "", opts = list(label = "\"carat-boxplot\"", exercise = "TRUE"), 
-        engine = "r")), code_check = NULL, error_check = NULL, 
-    check = NULL, solution = structure(c("ggplot(diamonds, aes(x = carat)) +", 
+learnr:::store_exercise_cache(structure(list(label = "carat-boxplot", global_setup = structure(c("knitr::opts_chunk$set(", 
+"  echo = FALSE,", "  message = FALSE, ", "  warning = FALSE,", 
+"  collapse = TRUE,", "  comment = \"#>\")", "", "library(learnr)", 
+"library(dplyr)", "library(readr)", "library(magrittr)", "library(ggplot2)", 
+"library(inteRactive231)"), chunk_opts = list(label = "setup", 
+    include = FALSE)), setup = NULL, chunks = list(list(label = "carat-boxplot", 
+    code = "", opts = list(label = "\"carat-boxplot\"", exercise = "TRUE"), 
+    engine = "r")), code_check = NULL, error_check = NULL, check = NULL, 
+    solution = structure(c("ggplot(diamonds, aes(x = carat)) +", 
     "  geom_boxplot()"), chunk_opts = list(label = "carat-boxplot-solution")), 
     tests = NULL, options = list(eval = FALSE, echo = TRUE, results = "markup", 
         tidy = FALSE, tidy.opts = NULL, collapse = TRUE, prompt = FALSE, 
@@ -545,21 +579,25 @@ learnr:::store_exercise_cache(structure(list(label = "carat-boxplot", global_set
     engine = "r", version = "4"), class = c("r", "tutorial_exercise"
 )))
 </script>
-
-
+ 
 <script type="application/shiny-prerendered" data-context="server">
 `tutorial-exercise-carat-cut-boxplot-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-carat-cut-boxplot-code-editor`)), session)
 output$`tutorial-exercise-carat-cut-boxplot-output` <- renderUI({
   `tutorial-exercise-carat-cut-boxplot-result`()
 })
 </script>
- 
+
+
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache(structure(list(label = "carat-cut-boxplot", global_setup = NULL, 
-    setup = NULL, chunks = list(list(label = "carat-cut-boxplot", 
-        code = "", opts = list(label = "\"carat-cut-boxplot\"", 
-            exercise = "TRUE"), engine = "r")), code_check = NULL, 
-    error_check = NULL, check = NULL, solution = structure(c("ggplot(diamonds, aes(x = carat, y = cut)) + ", 
+learnr:::store_exercise_cache(structure(list(label = "carat-cut-boxplot", global_setup = structure(c("knitr::opts_chunk$set(", 
+"  echo = FALSE,", "  message = FALSE, ", "  warning = FALSE,", 
+"  collapse = TRUE,", "  comment = \"#>\")", "", "library(learnr)", 
+"library(dplyr)", "library(readr)", "library(magrittr)", "library(ggplot2)", 
+"library(inteRactive231)"), chunk_opts = list(label = "setup", 
+    include = FALSE)), setup = NULL, chunks = list(list(label = "carat-cut-boxplot", 
+    code = "", opts = list(label = "\"carat-cut-boxplot\"", exercise = "TRUE"), 
+    engine = "r")), code_check = NULL, error_check = NULL, check = NULL, 
+    solution = structure(c("ggplot(diamonds, aes(x = carat, y = cut)) + ", 
     "  geom_boxplot()"), chunk_opts = list(label = "carat-cut-boxplot-solution")), 
     tests = NULL, options = list(eval = FALSE, echo = TRUE, results = "markup", 
         tidy = FALSE, tidy.opts = NULL, collapse = TRUE, prompt = FALSE, 
@@ -583,8 +621,7 @@ learnr:::store_exercise_cache(structure(list(label = "carat-cut-boxplot", global
     engine = "r", version = "4"), class = c("r", "tutorial_exercise"
 )))
 </script>
-
-
+ 
 <script type="application/shiny-prerendered" data-context="server">
 inteRactive231::encoder_logic()
 </script>

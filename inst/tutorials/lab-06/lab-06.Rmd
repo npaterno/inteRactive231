@@ -9,7 +9,7 @@ description: >
   For this lab, we will be peaking at section 7.5 (without worry about all the formulas). The analysis of variance - anova - test is equivalent to the chi-squared test but for numeric data instead of categorical data; It will compare the means of three or more samples. 
 ---
   
-```{r, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   echo = FALSE,
   message = FALSE, 

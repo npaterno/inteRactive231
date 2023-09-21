@@ -9,7 +9,7 @@ description: >
   Making Claims about a Population Based on Sample Data.
 ---
   
-```{r, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   echo = FALSE,
   message = FALSE, 

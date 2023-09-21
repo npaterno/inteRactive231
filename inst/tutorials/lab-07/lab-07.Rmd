@@ -9,7 +9,7 @@ description: >
   Building a basic linear regression model.
 ---
   
-```{r, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   echo = FALSE,
   message = FALSE, 

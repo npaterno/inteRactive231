@@ -342,7 +342,7 @@ solutions, please enter your identifying information, then click the button belo
 <label class="control-label" id="studentID-label" for="studentID">What is your student ID?</label>
 <input id="studentID" type="text" class="shiny-input-text form-control" value=""/>
 </div>
-<div id="outb7698fcf7290c621" class="shiny-text-output"></div>
+<div id="out7285e2be191b4ff6" class="shiny-text-output"></div>
 </div>
 <div class="row" style="padding-bottom: 0.5em;">
 <div class="col-sm-3">
@@ -405,37 +405,59 @@ solutions, please enter your identifying information, then click the button belo
       });</script>
 </div>
 <p>
+<script type="application/shiny-prerendered" data-context="server-start">
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE, 
+  warning = FALSE,
+  collapse = TRUE,
+  comment = "#>")
+
+library(learnr)
+library(dplyr)
+library(magrittr)
+library(openintro)
+library(ggplot2)
+library(moderndive)
+library(inteRactive231)
+</script>
+ 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::register_http_handlers(session, metadata = NULL)
 </script>
- 
+
+
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::prepare_tutorial_state(session)
 </script>
-
-
+ 
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::i18n_observe_tutorial_language(input, session)
 </script>
- 
+
+
 <script type="application/shiny-prerendered" data-context="server">
 session$onSessionEnded(function() {
         learnr:::event_trigger(session, "session_stop")
       })
 </script>
-
-
+ 
 <script type="application/shiny-prerendered" data-context="server">
 `tutorial-exercise-model-problem-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-model-problem-code-editor`)), session)
 output$`tutorial-exercise-model-problem-output` <- renderUI({
   `tutorial-exercise-model-problem-result`()
 })
 </script>
- 
+
+
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::store_exercise_cache(structure(list(label = "model-problem", global_setup = NULL, 
-    setup = NULL, chunks = list(list(label = "model-problem", 
-        code = "# Correlation\n\n# Scatterplot\n\n# Regression Table\n\n# Scatterplot with model overlay\n\n# Predictions\n", 
+learnr:::store_exercise_cache(structure(list(label = "model-problem", global_setup = structure(c("knitr::opts_chunk$set(", 
+"  echo = FALSE,", "  message = FALSE, ", "  warning = FALSE,", 
+"  collapse = TRUE,", "  comment = \"#>\")", "", "library(learnr)", 
+"library(dplyr)", "library(magrittr)", "library(openintro)", 
+"library(ggplot2)", "library(moderndive)", "library(inteRactive231)"
+), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "model-problem", code = "# Correlation\n\n# Scatterplot\n\n# Regression Table\n\n# Scatterplot with model overlay\n\n# Predictions\n", 
         opts = list(label = "\"model-problem\"", exercise = "TRUE"), 
         engine = "r")), code_check = NULL, error_check = NULL, 
     check = NULL, solution = structure(c("# NOTE: This is one possible solution for one possible data set. ", 
@@ -473,8 +495,7 @@ learnr:::store_exercise_cache(structure(list(label = "model-problem", global_set
     engine = "r", version = "4"), class = c("r", "tutorial_exercise"
 )))
 </script>
-
-
+ 
 <script type="application/shiny-prerendered" data-context="server">
 inteRactive231::encoder_logic()
 </script>

@@ -9,7 +9,7 @@ description: >
   Being able to analyze data is a good quality. Being able to present it in a clear, concise format is even better. In part I of our data viz labs, we create clear and concise plots. 
 ---
   
-```{r, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   echo = FALSE,
   message = FALSE, 
